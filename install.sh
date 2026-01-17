@@ -34,13 +34,7 @@ PACKAGES=(
     gnome-tweaks
     brave-browser
     syncthing
-    cockpit-ws
-    cockpit-bridge
-    cockpit-networkmanager
-    cockpit-ostree
-    cockpit-podman
-    cockpit-selinux
-    cockpit-storaged
+    cockpit
 )
 
 TO_INSTALL=()
