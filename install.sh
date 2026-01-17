@@ -26,7 +26,29 @@ fi
 
 # --- 2. Installation / Suppression de paquets (Layering & Overrides) ---
 # Liste des paquets à ajouter
-PACKAGES=(distrobox gnome-shell-extension-dash-to-dock gnome-tweaks brave-browser)
+PACKAGES=(
+    # Outils de base & Système
+    distrobox
+    cargo
+    cifs-utils
+    
+    # Interface & Personnalisation
+    gnome-shell-extension-dash-to-dock
+    gnome-tweaks
+    
+    # Applications
+    brave-browser
+    syncthing
+    
+    # Cockpit et ses modules (Le coeur de l'administration)
+    cockpit-ws
+    cockpit-bridge
+    cockpit-networkmanager
+    cockpit-ostree
+    cockpit-podman
+    cockpit-selinux
+    cockpit-storaged
+)r)
 TO_INSTALL=()
 
 echo "Vérification des paquets système..."
