@@ -9,8 +9,17 @@ echo "=== Configuration personnalisée Silverblue ==="
 echo "Vérification du dépôt Brave..."
 if [ ! -f /etc/yum.repos.d/brave-browser-rpm-release.repo ]; then
     echo "Ajout du dépôt Brave Browser..."
-    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    # On crée le fichier repo manuellement
+    sudo tee /etc/yum.repos.d/brave-browser-rpm-release.repo <<EOF
+[brave-browser-rpm-release]
+name=Brave Browser Release
+baseurl=https://brave-browser-rpm-release.s3.brave.com/x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+EOF
+    echo "Dépôt ajouté avec succès."
 else
     echo "Dépôt Brave déjà présent."
 fi
