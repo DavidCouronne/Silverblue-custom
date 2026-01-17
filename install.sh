@@ -48,7 +48,7 @@ PACKAGES=(
     cockpit-podman
     cockpit-selinux
     cockpit-storaged
-)r)
+)
 TO_INSTALL=()
 
 echo "Vérification des paquets système..."
