@@ -9,7 +9,7 @@ rpm-ostree install calibre distrobox rclone cockpit
 
 echo "=== Configuration Gnome extensionsions ==="
 
-rpm-ostree --install gnome-shell-extension-dash-to-dock gnome-tweaks
+rpm-ostree install gnome-shell-extension-dash-to-dock gnome-tweaks
 
 echo "=== Installation de Brave ==="
 
