@@ -3,7 +3,7 @@
 ## Base
 
 ```bash
-curl -sL https://raw.githubusercontent.com/DavidCouronne/Silverblue-custom/main/bash.sh | bash
+curl -sL https://raw.githubusercontent.com/DavidCouronne/Silverblue-custom/main/base.sh | bash
 ```
 
 ```bash
