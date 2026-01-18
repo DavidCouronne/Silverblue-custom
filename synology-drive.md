@@ -1,26 +1,65 @@
-# Créer un conteneur Debian
-
 ```bash
-distrobox create --name debian --image debian:latest
+# Créer un toolbox Fedora
+toolbox create synology-build
 ```
 
-# Entrer dans le conteneur
-```bash
-distrobox enter debian
-```
-
-# Dans le conteneur
+# Entrer dans le toolbox
 
 ```bash
-wget "https://global.synologydownload.com/download/Utility/SynologyDriveClient/4.0.1-17885/Ubuntu/Installer/synology-drive-client-17885.x86_64.deb?model=DS214play&bays=2&dsm_version=7.1.1&build_number=42962" -O synology-drive.deb
+toolbox enter synology-build
+```
+
+# Installer les outils de build
+
+```bash
+sudo dnf install rpm-build rpmdevtools binutils
 ```
 
 ```bash
-sudo apt install ./synology-drive.deb
+rpmdev-setuptree
 ```
 
-# Exporter l'application
+# Télécharger le .deb dans ~/rpmbuild/SOURCES/
 
 ```bash
-distrobox-export --app synology-drive
+mkdir -p ~/rpmbuild/SOURCES/
+cd ~/rpmbuild/SOURCES/
+wget "https://global.synologydownload.com/download/Utility/SynologyDriveClient/4.0.1-17885/Ubuntu/Installer/synology-drive-client-17885.x86_64.deb"
 ```
+
+# Copier le spec file dans ~/rpmbuild/SPECS/
+
+```bash
+mkdir -p ~/rpmbuild/SOURCES/
+cd ~/rpmbuild/SPECS/
+wget "https://raw.githubusercontent.com/DavidCouronne/Silverblue-custom/main/synology-drive.spec"
+```
+
+```bash
+mkdir -p ~/rpmbuild/SPECS/
+cd ~/rpmbuild/SPECS/
+rpmbuild -bb synology-drive.spec
+```
+
+
+# Copier le RPM sur le système hôte
+
+```bash
+cp ~/rpmbuild/RPMS/x86_64/synology-drive-4.0.1-17885.*.rpm /tmp/
+```
+
+# Sortir de la distrobox et installer sur l'hôte
+
+```bash
+exit
+```
+
+# Sur Silverblue
+
+```bash
+rpm-ostree install /tmp/synology-drive-4.0.1-17885.*.rpm
+systemctl reboot
+```
+
+
+
